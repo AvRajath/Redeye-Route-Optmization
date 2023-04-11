@@ -1,97 +1,60 @@
-class RouteGraph:
-    adj_matrix = []
-    location_map = {}
-
-    def __init__(self):
-        pass
-
-    def add_locations(self):
-        pass
-
-    def add_time_distance(self, location1, location2):
-        pass
-
+import sys
 
 class MST:
-
-    def __init__(self):
+    parent = []
+    def __init__(self, num_vertices):
+        self.parent = [i for i in range(num_vertices)]
         pass
 
     # finds the parent of a vertex
-    def find(self, parent, i):
-        if parent[i] == i:
-            return i
-        return self.find(parent, parent[i])
-
+    def find(self, i):
+        while self.parent[i] != i:
+            i = self.parent[i]
+        return i
 
     # union of two sets
-    def union(self, parent, rank, x, y):
-        xroot = self.find(parent, x)
-        yroot = self.find(parent, y)
-
-        if rank[xroot] < rank[yroot]:
-            parent[xroot] = yroot
-        elif rank[xroot] > rank[yroot]:
-            parent[yroot] = xroot
-        else:
-            parent[yroot] = xroot
-            rank[xroot] += 1
-
+    def union(self, x, y):
+        xroot = self.find(x)
+        yroot = self.find(y)
+        self.parent[xroot] = yroot
 
     # Kruskal's algorithm
-    def kruskalMST(self, graph):
-        result = []  # to store the result
-        i = 0  # index variable for sorted edges
-        e = 0  # index variable for result[]
+    def kruskalMST(self, adj_matrix):
+        mincost = 0  # Cost of min MST
+        num_vertices = len(self.parent)
+        # Initialize sets of disjoint sets
+        for i in range(num_vertices):
+            self.parent[i] = i
 
-        # get the number of vertices in the graph
-        V = len(graph)
+        # Include minimum weight edges one by one
+        edge_count = 0
+        while edge_count < num_vertices - 1:
+            min = sys.maxsize
+            a = -1
+            b = -1
+            for i in range(num_vertices):
+                for j in range(num_vertices):
+                    if self.find(i) != self.find(j) and adj_matrix[i][j] < min:
+                        min = adj_matrix[i][j]
+                        a = i
+                        b = j
+            self.union(a, b)
+            print('Edge {}:({}, {}) cost:{}'.format(edge_count, a, b, min))
+            edge_count += 1
+            mincost += min
 
-        # create an empty list to store the parents of each vertex
-        parent = []
-
-        # create an empty list to store the rank of each vertex
-        rank = []
-
-        # initialize the parent and rank lists
-        for node in range(V):
-            parent.append(node)
-            rank.append(0)
-
-        # sort the edges of the graph in ascending order of weight
-        sorted_edges = sorted(range(len(graph)), key=lambda i: graph[i])
-        print(sorted_edges)
-        # loop through all the edges of the graph
-        while e < V - 1:
-
-            # get the next smallest edge
-            u, v, w = sorted_edges[i]
-            i = i + 1
-            x = self.find(parent, u)
-            y = self.find(parent, v)
-
-            # if adding the edge doesn't create a cycle, add it to the result
-            if x != y:
-                e = e + 1
-                result.append([u, v, w])
-                self.union(parent, rank, x, y)
-
-        # print the MST
-        print("Edges of the Minimum Spanning Tree:")
-        for u, v, weight in result:
-            print(f"{u} -- {v} == {weight}")
-
+        print("Minimum cost= {}".format(mincost))
 
 
 # example graph represented by an adjacency matrix
-graph = [[0, 2, 0, 6, 0],
-         [2, 0, 3, 8, 5],
-         [0, 3, 0, 0, 7],
-         [6, 8, 0, 0, 9],
-         [0, 5, 7, 9, 0]]
-
-# find the minimum spanning tree using Kruskal's algorithm
-# kruskalMST(graph)
-
-mst = MST()
-mst.kruskalMST(graph)
+# graph = [[0, 2, 7, 6, 3],
+#          [2, 0, 3, 8, 5],
+#          [1, 3, 0, 2, 7],
+#          [6, 8, 1, 0, 9],
+#          [1, 5, 7, 9, 0]]
+#
+# # find the minimum spanning tree using Kruskal's algorithm
+# # kruskalMST(graph)
+#
+# mst = MST(5)
+# mst.kruskalMST(graph)
