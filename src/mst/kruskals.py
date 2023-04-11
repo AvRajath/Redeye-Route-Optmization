@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import sys
 
+=======
+>>>>>>> 0dd6f85 (added graph formationcode)
 class MST:
     parent = []
     def __init__(self, num_vertices):
