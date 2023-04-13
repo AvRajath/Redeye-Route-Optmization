@@ -73,7 +73,6 @@ def main():
 
         for row in data:
             row_data = [x for x in row if x == x]
-            print(row_data)
             # Compute the minimum spanning tree for distances
             mst_distance = adj_matrix.compute_minimum_spanning_tree_distance(row_data)
             distance_edges = mst_distance.get_edges()
@@ -84,17 +83,22 @@ def main():
             optimum_graph = optimum_path.Graph(list(distance_edges.values()))
             short_path_finder = optimum_path.ShortestPathFinder(optimum_graph, 0)
             shortest_path = short_path_finder.find_shortest_path()
-            print(shortest_path, row_data)
             maps_gen = map_generator.MapGenerator(row_data, shortest_path)
             maps_gen.generate_map()
 
     elif args.argument.lower() == "time":
         # Compute the minimum spanning tree for times
         for row in data:
-            mst_time = adj_matrix.compute_minimum_spanning_tree_time(row)
+            row_data = [x for x in row if x == x]
+            mst_time = adj_matrix.compute_minimum_spanning_tree_time(row_data)
             time_edges = mst_time.get_edges()
             for index in time_edges:
                 print(f'Edge {index}:({time_edges[index][0]}, {time_edges[index][1]}) cost:{time_edges[index][2]}')
+            optimum_graph = optimum_path.Graph(list(time_edges.values()))
+            short_path_finder = optimum_path.ShortestPathFinder(optimum_graph, 0)
+            shortest_path = short_path_finder.find_shortest_path()
+            maps_gen = map_generator.MapGenerator(row_data, shortest_path)
+            maps_gen.generate_map()
     else:
         print("Invalid input. Please enter either 'time' or 'distance'.")
 

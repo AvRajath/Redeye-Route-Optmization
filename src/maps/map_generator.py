@@ -34,7 +34,7 @@ class MapGenerator:
         	</style>
         </head>
         <body>
-        	<h1>Directions from the Empire State Building to the Statue of Liberty</h1>
+        	<h1>Directions from {origin} --to-- {destination}</h1>
         	<iframe id="map" src="{url}"></iframe>
         </body>
         </html>
