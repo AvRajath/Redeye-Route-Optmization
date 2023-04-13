@@ -5,10 +5,3 @@ class Constants(Enum):
 
 	XLSPATH = "/data/Dataset.xlsx"
 	GOOGLEAPIKEY = ""
-	
- 
-
-
-
-
-
