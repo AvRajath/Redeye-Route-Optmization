@@ -2,6 +2,7 @@ import sys
 
 class MST:
     parent = []
+    edges = {}
     def __init__(self, num_vertices):
         self.parent = [i for i in range(num_vertices)]
         pass
@@ -39,11 +40,12 @@ class MST:
                         a = i
                         b = j
             self.union(a, b)
-            print('Edge {}:({}, {}) cost:{}'.format(edge_count, a, b, min))
+            self.edges[edge_count] = (a, b, min)
             edge_count += 1
             mincost += min
 
-        print("Minimum cost= {}".format(mincost))
+    def getEdges(self):
+        return self.edges
 
 
 # example graph represented by an adjacency matrix
