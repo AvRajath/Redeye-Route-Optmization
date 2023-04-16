@@ -46,17 +46,3 @@ class MST:
 
     def getEdges(self):
         return self.edges
-
-
-# example graph represented by an adjacency matrix
-# graph = [[0, 2, 7, 6, 3],
-#          [2, 0, 3, 8, 5],
-#          [1, 3, 0, 2, 7],
-#          [6, 8, 1, 0, 9],
-#          [1, 5, 7, 9, 0]]
-#
-# # find the minimum spanning tree using Kruskal's algorithm
-# # kruskalMST(graph)
-#
-# mst = MST(5)
-# mst.kruskalMST(graph)
