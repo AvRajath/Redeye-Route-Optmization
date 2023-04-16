@@ -12,6 +12,9 @@ class MapGenerator:
         self.shortest_path = [x for x, y in shortest_path]
 
     def generate_map(self):
+        """
+        Generates map for the given map locations with the shortest path
+        """
         origin = self.locations[self.shortest_path[0]]
         destination = self.locations[self.shortest_path[-1]]
         waypoints = []
