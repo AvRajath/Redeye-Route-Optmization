@@ -16,7 +16,6 @@ class RouteGraph:
                     my_dist = self.gmaps.distance_matrix(row[i], row[j])['rows'][0]['elements'][0]
                     temp_sub_mat_time.append(my_dist['duration']['value'])
             adj_mat_time.append(temp_sub_mat_time)
-            # self.adjacency_matrix.append(adj_mat_time)
         return adj_mat_time
 
     def form_adjacency_matrix_distance(self, row):
@@ -30,5 +29,4 @@ class RouteGraph:
                     my_dist = self.gmaps.distance_matrix(row[i], row[j])['rows'][0]['elements'][0]
                     temp_sub_mat_dist.append(my_dist['distance']['value'])
             adj_mat_dist.append(temp_sub_mat_dist)
-        # self.adjacency_matrix.append(adj_mat_dist)
         return adj_mat_dist
