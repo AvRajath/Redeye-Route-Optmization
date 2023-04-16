@@ -18,6 +18,12 @@ class ShortestPathFinder:
         self.dist = {start_node: 0}
 
     def find_shortest_path(self):
+        """
+        Finds shortest path for nodes of given graph
+        
+        Returns:
+        sorted nodes (map locations)
+        """
         pq = [(0, self.start_node)]
         visited = set()
         while pq:
